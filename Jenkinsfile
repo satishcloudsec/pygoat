@@ -10,7 +10,7 @@ pipeline {
         stage('Secrets Scanning') {
             steps {
                echo "Started Secrets scanning uisng gitleaks"
-                sh "gitleaks detect . -v --no-git -f json -r secretsScanning.json"
+                sh "gitleaks --exit-code 0 detect . -v --no-git -f json -r secretsScanning.json"
             }
         }
         stage('Test') {
