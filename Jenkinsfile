@@ -22,7 +22,7 @@ pipeline {
 
         stage('Secrets Scanning Docker') {
             agent {
-                docker { image 'zricethezav/gitleaks' }
+                any { image 'zricethezav/gitleaks' }
             }
             steps {
                 sh 'docker run -v .:/path zricethezav/gitleaks:latest detect . -v --no-git -f json -r secretsScanning1.json --source="/path" '
