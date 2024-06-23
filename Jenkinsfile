@@ -19,6 +19,15 @@ pipeline {
                 sh "trivy -q repo . -f json -o trivy_report.json"
             }
         }
+
+        stage('Secrets Scanning Docker') {
+            agent {
+                docker { image 'zricethezav/gitleaks' }
+            }
+            steps {
+                sh 'docker run -v .:/path zricethezav/gitleaks:latest detect . -v --no-git -f json -r secretsScanning1.json --source="/path" '
+            }
+        }
         stage('Test') {
             steps {
                  echo "Test"
