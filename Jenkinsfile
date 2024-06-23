@@ -16,7 +16,7 @@ pipeline {
         stage('Dependency Scanning') {
             steps {
                echo "Started Dependency scanning uisng Trivy"
-                sh "trivy repo . -f json -r DependencyScanning.json"
+                sh "trivy -q repo . -f json -o trivy_report.json"
             }
         }
         stage('Test') {
